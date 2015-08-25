@@ -133,6 +133,47 @@
             $this->assertEquals([$test_department2], $result);
         }
 
+        function test_getStudents()
+        {
+            //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
+            $test_student = new Student("Jaloop", "2015-04-20", $test_department->getId());
+            $test_student->save();
+
+            $test_student2 = new Student("Bobby the Broom", "2004-02-12", $test_department->getId());
+            $test_student2->save();
+
+            //Act
+            $result = $test_department->getStudents();
+
+            //Assert
+            $this->assertEquals([$test_student, $test_student2], $result);
+        }
+
+        function test_getCourses()
+        {
+            //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
+            $name = "History 0001";
+            $code = "HS001";
+            $test_course = new Course($name, $code, $test_department->getId());
+            $test_course->save();
+
+            $name2 = "Dogs 101";
+            $code2 = "DW101";
+            $test_course2 = new Course($name2, $code2, $test_department->getId());
+            $test_course2->save();
+
+            //Act
+            $result = $test_department->getCourses();
+
+            //Assert
+            $this->assertEquals([$test_course, $test_course2], $result);
+        }
 
     }
 
