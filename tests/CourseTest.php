@@ -19,6 +19,7 @@
         {
             Course::deleteAll();
             Student::deleteAll();
+            Department::deleteAll();
         }
 
         function test_getName()
@@ -38,9 +39,12 @@
         function test_save()
         {
             //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
             $name = "History 0001";
             $code = "HS001";
-            $test_course = new Course($name, $code);
+            $test_course = new Course($name, $code, $test_department->getId());
             $test_course->save();
 
             //Act
@@ -53,14 +57,17 @@
         function test_getAll()
         {
             //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
             $name = "History 0001";
             $code = "HS001";
-            $test_course = new Course($name, $code);
+            $test_course = new Course($name, $code, $test_department->getId());
             $test_course->save();
 
             $name2 = "Dogs 101";
             $code2 = "DW101";
-            $test_course2 = new Course($name2, $code2);
+            $test_course2 = new Course($name2, $code2, $test_department->getId());
             $test_course2->save();
 
             //Act
@@ -74,14 +81,17 @@
         function test_find()
         {
             //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
             $name = "History 0001";
             $code = "HS001";
-            $test_course = new Course($name, $code);
+            $test_course = new Course($name, $code, $test_department->getId());
             $test_course->save();
 
             $name2 = "Dogs 101";
             $code2 = "DW101";
-            $test_course2 = new Course($name2, $code2);
+            $test_course2 = new Course($name2, $code2, $test_department->getId());
             $test_course2->save();
 
             //Act
@@ -95,9 +105,12 @@
         function test_updateName()
         {
            //Arrange
+           $test_department = new Department("Biology", "346 Stupid Avenue");
+           $test_department->save();
+
            $name = "History 0001";
            $code = "HS0001";
-           $test_course = new Course($name, $code);
+           $test_course = new Course($name, $code, $test_department->getId());
 
            //Act
            $new_name = "Da Constitutia";
@@ -111,14 +124,17 @@
         function test_delete()
         {
             //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
             $name = "History 0001";
             $code = "HS001";
-            $test_course = new Course($name, $code);
+            $test_course = new Course($name, $code, $test_department->getId());
             $test_course->save();
 
             $name2 = "Dogs 101";
             $code2 = "DW101";
-            $test_course2 = new Course($name2, $code2);
+            $test_course2 = new Course($name2, $code2, $test_department->getId());
             $test_course2->save();
 
             //Act
@@ -133,13 +149,16 @@
         function test_addStudent()
         {
             //Arrange
-            $test_course = new Course("Fundamentals of Human Anatomy", "SEXY101");
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
+            $test_course = new Course("Fundamentals of Human Anatomy", "SEXY101", $test_department->getId());
             $test_course->save();
 
-            $test_course2 = new Course("Organic Chemistry of Cannabinoids", "CHEM420");
+            $test_course2 = new Course("Organic Chemistry of Cannabinoids", "CHEM420", $test_department->getId());
             $test_course2->save();
 
-            $test_student = new Student("Sarah", "2000-04-01");
+            $test_student = new Student("Sarah", "2000-04-01", $test_department->getId());
             $test_student->save();
 
             //Act
@@ -152,16 +171,19 @@
         function test_getStudents()
         {
             //Arrange
-            $test_course = new Course("Fundamentals of Human Anatomy", "SEXY101");
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
+            $test_course = new Course("Fundamentals of Human Anatomy", "SEXY101", $test_department->getId());
             $test_course->save();
 
-            $test_course2 = new Course("Organic Chemistry of Cannabinoids", "CHEM420");
+            $test_course2 = new Course("Organic Chemistry of Cannabinoids", "CHEM420", $test_department->getId());
             $test_course2->save();
 
-            $test_student = new Student("Sarah", "2000-04-01");
+            $test_student = new Student("Sarah", "2000-04-01", $test_department->getId());
             $test_student->save();
 
-            $test_student2 = new Student("JC", "0000-12-25");
+            $test_student2 = new Student("JC", "0000-12-25", $test_department->getId());
             $test_student2->save();
 
             //Act

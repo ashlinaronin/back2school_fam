@@ -68,12 +68,34 @@
         //get other classes
         function getStudents()
         {
+            $students_query = $GLOBALS['DB']->query("SELECT * FROM students WHERE department_id = {$this->getId()};");
 
+            $matching_students = array();
+            foreach ($students_query as $student) {
+                $name = $student['name'];
+                $enrollment_date = $student['enrollment_date'];
+                $department_id = $student['department_id'];
+                $id = $student['id'];
+                $new_student = new Student($name, $enrollment_date, $department_id, $id);
+                array_push($matching_students, $new_student);
+            }
+            return $matching_students;
         }
 
         function getCourses()
         {
+            $courses_query = $GLOBALS['DB']->query("SELECT * FROM courses WHERE department_id = {$this->getId()};");
 
+            $matching_courses = array();
+            foreach ($courses_query as $course) {
+                $name = $course['name'];
+                $code = $course['code'];
+                $department_id = $course['department_id'];
+                $id = $course['id'];
+                $new_course = new Course($name, $code, $department_id, $id);
+                array_push($matching_courses, $new_course);
+            }
+            return $matching_courses;
         }
 
         static function getAll()

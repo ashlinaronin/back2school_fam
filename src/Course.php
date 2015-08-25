@@ -4,12 +4,14 @@
     {
         private $name;
         private $code;
+        private $department_id;
         private $id;
 
-        function __construct($name, $code, $id = null)
+        function __construct($name, $code, $department_id = null, $id = null)
         {
             $this->name = $name;
             $this->code = $code;
+            $this->department_id = $department_id;
             $this->id = $id;
         }
 
@@ -33,6 +35,16 @@
             return $this->code;
         }
 
+        function getDepartmentId()
+        {
+            return $this->department_id;
+        }
+
+        function setDepartmentId($new_id)
+        {
+            $this->department_id = $new_id;
+        }
+
         function getId()
         {
             return $this->id;
@@ -41,9 +53,10 @@
         function save()
         {
             try {
-                $GLOBALS['DB']->exec("INSERT INTO courses (name, code) VALUES (
+                $GLOBALS['DB']->exec("INSERT INTO courses (name, code, department_id) VALUES (
                     '{$this->getName()}',
-                    '{$this->getCode()}'
+                    '{$this->getCode()}',
+                    {$this->getDepartmentId()}
                 );");
                 $this->id = $GLOBALS['DB']->lastInsertId();
             } catch (PDOException $e) {
@@ -76,8 +89,9 @@
             foreach ($students_query as $student) {
                 $name = $student['name'];
                 $enrollment_date = $student['enrollment_date'];
+                $department_id = $student['department_id'];
                 $id = $student['id'];
-                $new_student = new Student($name, $enrollment_date, $id);
+                $new_student = new Student($name, $enrollment_date, $department_id, $id);
                 array_push($matching_students, $new_student);
             }
             return $matching_students;
@@ -102,8 +116,9 @@
             foreach ($returned_courses as $course) {
                 $name = $course['name'];
                 $code = $course['code'];
+                $department_id = $course['department_id'];
                 $id = $course['id'];
-                $new_course = new Course($name, $code, $id);
+                $new_course = new Course($name, $code, $department_id, $id);
                 array_push($courses, $new_course);
             }
             return $courses;
@@ -112,6 +127,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM courses;");
+            $GLOBALS['DB']->exec("DELETE FROM enrollments;");
         }
 
         static function find($search_id)
