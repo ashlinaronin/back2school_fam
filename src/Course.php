@@ -65,12 +65,30 @@
 
         function getStudents()
         {
-
+            $students_query = $GLOBALS['DB']->query(
+                "SELECT students.* FROM
+                    courses JOIN enrollments ON (enrollments.course_id = courses.id)
+                            JOIN students    ON (enrollments.student_id = students.id)
+                 WHERE courses.id = {$this->getId()};
+                "
+            );
+            $matching_students = array();
+            foreach ($students_query as $student) {
+                $name = $student['name'];
+                $enrollment_date = $student['enrollment_date'];
+                $id = $student['id'];
+                $new_student = new Student($name, $enrollment_date, $id);
+                array_push($matching_students, $new_student);
+            }
+            return $matching_students;
         }
 
         function addStudent($student)
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO enrollments (student_id, course_id) VALUES(
+                {$student->getId()},
+                {$this->getId()}
+            );");
         }
 
         static function getAll()

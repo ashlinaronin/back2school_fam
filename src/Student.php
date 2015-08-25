@@ -2,25 +2,25 @@
     // TASK
     class Student {
 
-        private $student_name;
+        private $name;
         private $enrollment_date;
         private $id;
 
-        function __construct($student_name, $enrollment_date, $id = null)
+        function __construct($name, $enrollment_date, $id = null)
         {
-            $this->student_name = $student_name;
+            $this->name = $name;
             $this->enrollment_date = $enrollment_date;
             $this->id = $id;
         }
 
         function getStudentName()
         {
-            return $this->student_name;
+            return $this->name;
         }
 
-        function setStudentName($new_student_name)
+        function setStudentName($new_name)
         {
-            $this->student_name = $new_student_name;
+            $this->name = $new_name;
         }
 
         function getEnrollmentDate()
@@ -36,7 +36,7 @@
         function save()
         {
             try {
-                $GLOBALS['DB']->exec("INSERT INTO students (student_name, enrollment_date) VALUES (
+                $GLOBALS['DB']->exec("INSERT INTO students (name, enrollment_date) VALUES (
                     '{$this->getStudentName()}',
                     '{$this->getEnrollmentDate()}'
                 );");
@@ -61,7 +61,7 @@
 
         function updateName($new_name)
         {
-            $GLOBALS['DB']->exec("UPDATE students SET student_name = '{$new_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE students SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setStudentName($new_name);
         }
 
@@ -82,10 +82,10 @@
 
             $all_students = array();
             foreach ($students_query as $student) {
-                $student_name = $student['student_name'];
+                $name = $student['name'];
                 $enrollment_date = $student['enrollment_date'];
                 $id = $student['id'];
-                $new_student = new Student($student_name, $enrollment_date, $id);
+                $new_student = new Student($name, $enrollment_date, $id);
                 array_push($all_students, $new_student);
             }
             return $all_students;

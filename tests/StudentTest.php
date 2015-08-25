@@ -23,24 +23,24 @@
         function test_getStudentName()
         {
             //Arrange
-            $student_name = "Ashlin Aronin";
+            $name = "Ashlin Aronin";
             $enrollment_date = "2014-08-09";
-            $test_student = new Student($student_name, $enrollment_date);
+            $test_student = new Student($name, $enrollment_date);
 
             //Act
             $result = $test_student->getStudentName();
 
             //Assert
-            $this->assertEquals($student_name, $result);
+            $this->assertEquals($name, $result);
 
         }
 
         function test_save()
         {
             //Arrange
-            $student_name = "Ashlin Aronin";
+            $name = "Ashlin Aronin";
             $enrollment_date = "2014-08-09";
-            $test_student = new Student($student_name, $enrollment_date);
+            $test_student = new Student($name, $enrollment_date);
 
             //Act
             $test_student->save();
@@ -53,14 +53,14 @@
         function test_getAll()
         {
             //Arrange
-            $student_name = "Ashlin Aronin";
+            $name = "Ashlin Aronin";
             $enrollment_date = "2015-08-24";
-            $test_student = new Student($student_name, $enrollment_date);
+            $test_student = new Student($name, $enrollment_date);
             $test_student->save();
 
-            $student_name2 = "John Nolastname";
+            $name2 = "John Nolastname";
             $enrollment_date2 = "2015-07-20";
-            $test_student2 = new Student($student_name, $enrollment_date);
+            $test_student2 = new Student($name, $enrollment_date);
             $test_student2->save();
 
             //Act
@@ -74,14 +74,14 @@
         function test_find()
         {
             //Arrange
-            $student_name = "Ashlin Aronin";
+            $name = "Ashlin Aronin";
             $enrollment_date = "2015-08-24";
-            $test_student = new Student($student_name, $enrollment_date);
+            $test_student = new Student($name, $enrollment_date);
             $test_student->save();
 
-            $student_name2 = "John Nolastname";
+            $name2 = "John Nolastname";
             $enrollment_date2 = "2015-07-20";
-            $test_student2 = new Student($student_name, $enrollment_date);
+            $test_student2 = new Student($name, $enrollment_date);
             $test_student2->save();
 
             //Act
@@ -95,14 +95,14 @@
         function test_updateName()
         {
             //Arrange
-            $student_name = "Ashlin Aronin";
+            $name = "Ashlin Aronin";
             $enrollment_date = "2015-08-24";
-            $test_student = new Student($student_name, $enrollment_date);
+            $test_student = new Student($name, $enrollment_date);
             $test_student->save();
 
-            $student_name2 = "John Nolastname";
+            $name2 = "John Nolastname";
             $enrollment_date2 = "2015-07-20";
-            $test_student2 = new Student($student_name, $enrollment_date);
+            $test_student2 = new Student($name, $enrollment_date);
             $test_student2->save();
 
             //Act
@@ -118,14 +118,14 @@
         function test_delete()
         {
             //Arrange
-            $student_name = "Ashlin Aronin";
+            $name = "Ashlin Aronin";
             $enrollment_date = "2015-08-24";
-            $test_student = new Student($student_name, $enrollment_date);
+            $test_student = new Student($name, $enrollment_date);
             $test_student->save();
 
-            $student_name2 = "John Nolastname";
+            $name2 = "John Nolastname";
             $enrollment_date2 = "2015-07-20";
-            $test_student2 = new Student($student_name, $enrollment_date);
+            $test_student2 = new Student($name, $enrollment_date);
             $test_student2->save();
 
             //Act
