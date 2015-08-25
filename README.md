@@ -1,9 +1,7 @@
-# University Registrar
+University Registrar
+==========
 
-
-#### By Filipe Silvestre, Samantha Maturen
-
-## Description
+By Filipe Silvestre, Samantha Maturen - 25-Aug-2015
 
 This application will allow a registrar to add students, courses, and departments to a university and add all the good stuff inbetween.
 
