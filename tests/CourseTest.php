@@ -20,20 +20,19 @@
             Course::deleteAll();
             Student::deleteAll();
         }
-    
-        function testGetId()
+
+        function test_getName()
         {
            //Arrange
-           $course_name = "History 0001";
-           $course_number = "HS0001";
-           $id = 1;
-           $test_Course = new Course($course_name, $course_number, $id);
+           $name = "History 0001";
+           $code = "HS0001";
+           $test_course = new Course($name, $code);
 
            //Act
-           $result = $test_Course->getId();
+           $result = $test_course->getName();
 
            //Assert
-           $this->assertEquals(true, is_numeric($result));
+           $this->assertEquals($name, $result);
        }
 
     //     function testSave()
