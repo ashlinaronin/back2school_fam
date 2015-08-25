@@ -36,10 +36,11 @@
         function save()
         {
             try {
-                $GLOBALS['DB']->exec("INSERT INTO students (student_name, enrollment_date, course_id)
-                VALUES ('{$this->getStudentName()}', '{$this->getEnrollmentDate()}', {$this->getCourseId()});");
-                $result_id = $GLOBALS['DB']->lastInsertId();
-                $this->setId($result_id);
+                $GLOBALS['DB']->exec("INSERT INTO students (student_name, enrollment_date) VALUES (
+                    '{$this->getStudentName()}',
+                    '{$this->getEnrollmentDate()}'
+                );");
+                $this->id = $GLOBALS['DB']->lastInsertId();
                 } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
@@ -48,21 +49,20 @@
         static function getAll()
         {
             try {
-                $returned_students = $GLOBALS['DB']->query("SELECT * FROM students;");
+                $students_query = $GLOBALS['DB']->query("SELECT * FROM students;");
             } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
 
-            $students = array();
-            foreach ($returned_students as $student) {
+            $all_students = array();
+            foreach ($students_query as $student) {
                 $student_name = $student['student_name'];
                 $enrollment_date = $student['enrollment_date'];
-                $course_id = $student['course_id'];
                 $id = $student['id'];
-                $new_student = new Student($student_name, $enrollment_date, $course_id, $id);
-                array_push($students, $new_student);
+                $new_student = new Student($student_name, $enrollment_date, $id);
+                array_push($all_students, $new_student);
             }
-            return $students;
+            return $all_students;
         }
 
         static function deleteAll()
