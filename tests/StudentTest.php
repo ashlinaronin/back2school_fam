@@ -92,6 +92,27 @@
         }
 
         //update test
+        function test_updateName()
+        {
+            //Arrange
+            $student_name = "Ashlin Aronin";
+            $enrollment_date = "2015-08-24";
+            $test_student = new Student($student_name, $enrollment_date);
+            $test_student->save();
+
+            $student_name2 = "John Nolastname";
+            $enrollment_date2 = "2015-07-20";
+            $test_student2 = new Student($student_name, $enrollment_date);
+            $test_student2->save();
+
+            //Act
+            $new_name = "Bashlin Baronan";
+            $test_student->updateName($new_name);
+
+            //Assert
+            $result = Student::getAll();
+            $this->assertEquals($new_name, $result[0]->getStudentName());
+        }
 
         // delete test
     }
