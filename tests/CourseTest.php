@@ -101,10 +101,10 @@
 
            //Act
            $new_name = "Da Constitutia";
-           $result = $test_course->updateName($new_name);
+           $test_course->updateName($new_name);
 
            //Assert
-           $this->assertEquals($new_name, $result);
+           $this->assertEquals($new_name, $test_course->getName());
        }
 
         //delete test
