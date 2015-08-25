@@ -46,15 +46,18 @@
             }
         }
 
+
+        // These two methods require the join table
         function addCourse($course)
         {
 
         }
-
         function getCourses()
         {
 
         }
+
+
 
         function updateName($new_name)
         {
@@ -63,7 +66,7 @@
 
         function delete()
         {
-            
+
         }
 
 
@@ -88,7 +91,14 @@
 
         static function find($search_id)
         {
-
+            $found_student = null;
+            $all_students = Student::getAll();
+            foreach ($all_students as $student) {
+                if ($student->getId() == $search_id) {
+                    $found_student = $student;
+                }
+            }
+            return $found_student;
         }
 
         static function deleteAll()
