@@ -50,11 +50,29 @@
         // These two methods require the join table
         function addCourse($course)
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO enrollments (student_id, course_id) VALUES(
+                {$this->getId()},
+                {$course->getId()}
+            );");
         }
         function getCourses()
         {
-
+            $courses_query = $GLOBALS['DB']->query(
+                "SELECT courses.* FROM
+                    students JOIN enrollments ON (enrollments.student_id = students.id)
+                             JOIN courses     ON (enrollments.course_id  = courses.id)
+                 WHERE students.id = {$this->getId()};
+                "
+            );
+            $matching_courses = array();
+            foreach ($courses_query as $course) {
+                $name = $course['name'];
+                $code = $course['code'];
+                $id = $course['id'];
+                $new_course = new Course($name, $code, $id);
+                array_push($matching_courses, $new_course);
+            }
+            return $matching_courses;
         }
 
 
