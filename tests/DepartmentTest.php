@@ -41,7 +41,6 @@
             $name = "Biology";
             $address = "346 Stupid Avenue";
             $test_department = new Department($name, $address);
-            $test_department->save();
 
             //Act
             $test_department->save();
@@ -109,6 +108,7 @@
             $test_department->updateName($new_name);
 
             //Assert
+            $result = Department::getAll();
             $this->assertEquals($new_name, $result[0]->getName());
         }
 
@@ -130,7 +130,7 @@
 
             //Assert
             $result = Department::getAll();
-            $this->assertEquals([$test_student2], $result);
+            $this->assertEquals([$test_department2], $result);
         }
 
 
