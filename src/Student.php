@@ -1,5 +1,5 @@
 <?php
-    // TASK
+
     class Student {
 
         private $name;
@@ -100,8 +100,32 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
-            //$GLOBALS['DB']->exec("DELETE FROM enrollments WHERE student_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM enrollments WHERE student_id = {$this->getId()};");
         }
+
+
+        // Completed course methods
+        function updateCompleted($course_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE enrollments SET completed = 1 WHERE student_id = {$this->getId()} AND course_id = {$course_id};");
+        }
+
+        function getCompleted($course_id)
+        {
+            $completed_query = $GLOBALS['DB']->query("SELECT * FROM enrollments WHERE student_id = {$this->getId()} AND course_id = {$course_id};");
+            $garbage = array();
+            foreach ($completed_query as $row) {
+                array_push($garbage, $row['completed']);
+            }
+            if ($garbage[0] == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+
 
 
         static function getAll()

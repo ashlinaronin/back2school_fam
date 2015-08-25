@@ -198,6 +198,32 @@
             $this->assertEquals($test_student->getCourses(), [$test_course, $test_course2]);
 
         }
+
+        function test_updateCompleted()
+        {
+            //Arrange
+            $test_department = new Department("Biology", "346 Stupid Avenue");
+            $test_department->save();
+
+            $test_student = new Student("Shmuel Irving-Jones", "2015-08-25", $test_department->getId());
+            $test_student->save();
+
+            $test_course = new Course("High Times", "CHEM420", $test_department->getId());
+            $test_course->save();
+
+            $test_course2 = new Course("Gavanese Jamelan", "MUSC69", $test_department->getId());
+            $test_course2->save();
+
+            $test_student->addCourse($test_course);
+            $test_student->addCourse($test_course2);
+
+
+            //Act
+            $test_student->updateCompleted($test_course->getId());
+
+            //Assert
+            $this->assertEquals(true, $test_student->getCompleted($test_course->getId()));
+        }
     }
 
 
