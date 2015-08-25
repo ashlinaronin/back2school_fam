@@ -46,6 +46,27 @@
             }
         }
 
+        function addCourse($course)
+        {
+
+        }
+
+        function getCourses()
+        {
+
+        }
+
+        function updateName($new_name)
+        {
+
+        }
+
+        function delete()
+        {
+            
+        }
+
+
         static function getAll()
         {
             try {
@@ -63,6 +84,11 @@
                 array_push($all_students, $new_student);
             }
             return $all_students;
+        }
+
+        static function find($search_id)
+        {
+
         }
 
         static function deleteAll()
