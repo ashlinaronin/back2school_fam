@@ -51,6 +51,26 @@
             }
         }
 
+        function updateName($new_name)
+        {
+
+        }
+
+        function delete()
+        {
+
+        }
+
+        function getStudents()
+        {
+
+        }
+
+        function addStudent($student)
+        {
+
+        }
+
         static function getAll()
         {
             try {
@@ -74,10 +94,9 @@
             $GLOBALS['DB']->exec("DELETE FROM courses;");
         }
 
-        function find($searchId)
+        static function find($searchId)
         {
 
         }
-
     }
 ?>

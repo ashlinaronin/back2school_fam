@@ -69,6 +69,34 @@
             //Assert
             $this->assertEquals([$test_course, $test_course2], $result);
         }
+
+        // find test
+        function test_find()
+        {
+            //Arrange
+            $name = "History 0001";
+            $code = "HS001";
+            $test_course = new Course($name, $code);
+            $test_course->save();
+
+            $name2 = "Dogs 101";
+            $code2 = "DW101";
+            $test_course2 = new Course($name2, $code2);
+            $test_course2->save();
+
+            //Act
+            $result = Course::find($test_course->getId());
+
+            //Assert
+            $this->assertEquals($test_course, $result);
+        }
+
+
+        //update test
+
+        //delete test
+
+        //add student and get students tests together
      }
 
 
