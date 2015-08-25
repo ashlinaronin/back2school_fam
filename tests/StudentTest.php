@@ -135,6 +135,47 @@
             $result = Student::getAll();
             $this->assertEquals([$test_student2], $result);
         }
+
+        function test_addCourse()
+        {
+            //Arrange
+            $test_student = new Student("Shmuel Irving-Jones", "2015-08-25");
+            $test_student->save();
+
+            $test_course = new Course("High Times", "CHEM420");
+            $test_course->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(), [$test_course]);
+        }
+
+        function test_getCourses()
+        {
+            //Arrange
+            $test_student = new Student("Shmuel Irving-Jones", "2015-08-25");
+            $test_student->save();
+
+            $test_student2 = new Student("Billy Bartle-Barnaby", "2015-07-09");
+            $test_student2->save();
+
+            $test_course = new Course("High Times", "CHEM420");
+            $test_course->save();
+
+            $test_course2 = new Course("Gavanese Jamelan", "MUSC69");
+            $test_course2->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+            $test_student->addCourse($test_course2);
+            $test_student2->addCourse($test_course2);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(), [$test_course, $test_course2]);
+
+        }
     }
 
 
