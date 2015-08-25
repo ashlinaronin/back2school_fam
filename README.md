@@ -1,7 +1,7 @@
 University Registrar
 ==========
 
-By Filipe Silvestre, Samantha Maturen - 25-Aug-2015
+By Filipe Silvestre, Samantha Maturen, Ashlin Aronin, Deron Johnson - 25-Aug-2015
 
 This application will allow a registrar to add students, courses, and departments to a university and add all the good stuff inbetween.
 
@@ -29,4 +29,4 @@ PHP, Twig, Silex, PHPUnit, MySQL, HTML, Bootstrap, CSS
 
 License
 ----------
-MIT License, Copyright (c) 2015 Samantha Maturen, Filipe Silvestre
+MIT License, Copyright (c) 2015 Samantha Maturen, Filipe Silvestre, Ashlin Aronin, Deron Johnson

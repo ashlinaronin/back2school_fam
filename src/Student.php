@@ -110,6 +110,9 @@
             $GLOBALS['DB']->exec("UPDATE enrollments SET completed = 1 WHERE student_id = {$this->getId()} AND course_id = {$course_id};");
         }
 
+
+        // This works, but is basically a workaround. Next time try to just get one piece of data from SQL query
+        // without foreach loop.
         function getCompleted($course_id)
         {
             $completed_query = $GLOBALS['DB']->query("SELECT * FROM enrollments WHERE student_id = {$this->getId()} AND course_id = {$course_id};");
