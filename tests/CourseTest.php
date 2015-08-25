@@ -91,8 +91,21 @@
             $this->assertEquals($test_course, $result);
         }
 
-
         //update test
+        function test_updateName()
+        {
+           //Arrange
+           $name = "History 0001";
+           $code = "HS0001";
+           $test_course = new Course($name, $code);
+
+           //Act
+           $new_name = "Da Constitutia";
+           $result = $test_course->updateName($new_name);
+
+           //Assert
+           $this->assertEquals($new_name, $result);
+       }
 
         //delete test
 
