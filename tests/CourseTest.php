@@ -108,6 +108,26 @@
        }
 
         //delete test
+        function test_delete()
+        {
+            //Arrange
+            $name = "History 0001";
+            $code = "HS001";
+            $test_course = new Course($name, $code);
+            $test_course->save();
+
+            $name2 = "Dogs 101";
+            $code2 = "DW101";
+            $test_course2 = new Course($name2, $code2);
+            $test_course2->save();
+
+            //Act
+            $test_course->delete();
+
+            //Assert
+            $result = Course::getAll();
+            $this->assertEquals($test_course2, $result[0]);
+        }
 
         //add student and get students tests together
      }
