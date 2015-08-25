@@ -130,8 +130,47 @@
         }
 
         //add student and get students tests together
-     }
+        function test_addStudent()
+        {
+            //Arrange
+            $test_course = new Course("Fundamentals of Human Anatomy", "SEXY101");
+            $test_course->save();
 
+            $test_course2 = new Course("Organic Chemistry of Cannabinoids", "CHEM420");
+            $test_course2->save();
 
+            $test_student = new Student("Sarah", "2000-04-01");
+            $test_student->save();
 
+            //Act
+            $test_course->addStudent($test_student);
+
+            //Assert
+            $this->assertEquals($test_course->getStudents(), [$test_student]);
+        }
+
+        function test_getStudents()
+        {
+            //Arrange
+            $test_course = new Course("Fundamentals of Human Anatomy", "SEXY101");
+            $test_course->save();
+
+            $test_course2 = new Course("Organic Chemistry of Cannabinoids", "CHEM420");
+            $test_course2->save();
+
+            $test_student = new Student("Sarah", "2000-04-01");
+            $test_student->save();
+
+            $test_student2 = new Student("JC", "0000-12-25");
+            $test_student2->save();
+
+            //Act
+            $test_course->addStudent($test_student);
+            $test_course->addStudent($test_student2);
+            $test_course2->addStudent($test_student);
+
+            //Assert
+            $this->assertEquals($test_course->getStudents(), [$test_student, $test_student2]);
+        }
+    }
 ?>
