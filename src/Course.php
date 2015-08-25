@@ -41,10 +41,11 @@
         function save()
         {
             try {
-                $GLOBALS['DB']->exec("INSERT INTO courses (name, code)
-                VALUES ('{$this->getName()}', '{$this->getCode()}');");
-                $result_id = $GLOBALS['DB']->lastInsertId();
-                $this->setId($result_id);
+                $GLOBALS['DB']->exec("INSERT INTO courses (name, code) VALUES (
+                    '{$this->getName()}',
+                    '{$this->getCode()}'
+                );");
+                $this->id = $GLOBALS['DB']->lastInsertId();
             } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
