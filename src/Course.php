@@ -2,35 +2,35 @@
 
     class Course
     {
-        private $course_name;
-        private $course_number;
+        private $name;
+        private $code;
         private $id;
 
-        function __construct($course_name, $course_number, $id = null)
+        function __construct($name, $code, $id = null)
         {
-            $this->course_name = $course_name;
-            $this->course_number = $course_number;
+            $this->name = $name;
+            $this->code = $code;
             $this->id = $id;
         }
 
-        function setCourseName($new_course_name)
+        function setName($new_name)
         {
-            $this->course_name = (string) $new_course_name;
+            $this->name = (string) $new_name;
         }
 
-        function getCourseName()
+        function getName()
         {
-            return $this->course_name;
+            return $this->name;
         }
 
-        function setCourseNumber($new_course_number)
+        function setCode($new_code)
         {
-            $this->course_number = (string) $new_course_number;
+            $this->code = (string) $new_code;
         }
 
-        function getCourseNumber()
+        function getCode()
         {
-            return $this->course_number;
+            return $this->code;
         }
 
         function getId()
@@ -38,16 +38,11 @@
             return $this->id;
         }
 
-        function setId($new_id)
-        {
-            $this->id = $new_id;
-        }
-
         function save()
         {
             try {
-                $GLOBALS['DB']->exec("INSERT INTO courses (course_name, course_number)
-                VALUES ('{$this->getCourseName()}', '{$this->getCourseNumber()}');");
+                $GLOBALS['DB']->exec("INSERT INTO courses (name, code)
+                VALUES ('{$this->getName()}', '{$this->getCode()}');");
                 $result_id = $GLOBALS['DB']->lastInsertId();
                 $this->setId($result_id);
             } catch (PDOException $e) {
@@ -64,10 +59,10 @@
             }
             $courses = array();
             foreach ($returned_courses as $course) {
-                $course_name = $course['course_name'];
-                $course_number = $course['course_number'];
+                $name = $course['name'];
+                $code = $course['code'];
                 $id = $course['id'];
-                $new_course = new Course($course_name, $course_number, $id);
+                $new_course = new Course($name, $code, $id);
                 array_push($courses, $new_course);
             }
             return $courses;
