@@ -7,7 +7,7 @@
         private $course_id;
         private $id;
 
-        function __construct($student_name, $course_id, $enrollment_date = null, $id = null)
+        function __construct($student_name, $enrollment_date = null, $course_id, $id = null)
         {
             $this->student_name = $student_name;
             $this->enrollment_date = $enrollment_date;
@@ -40,10 +40,10 @@
             return $this->course_id;
         }
 
-        // function setCourseId($new_course_id)
-        // {
-        //     $this->course_id = $new_course_id;
-        // }
+        function setId($new_id)
+        {
+            $this->id = $new_id;
+        }
 
         function getId()
         {
@@ -53,13 +53,13 @@
         function save()
         {
             try {
-                $statement = $GLOBALS['DB']->exec("INSERT INTO students (student_name, enrollment_date, course_id)
+                $GLOBALS['DB']->exec("INSERT INTO students (student_name, enrollment_date, course_id)
                 VALUES ('{$this->getStudentName()}', '{$this->getEnrollmentDate()}', {$this->getCourseId()});");
-                $this->id = $GLOBALS['DB']->lastInsertId();
-            } catch (PDOException $e) {
+                $result_id = $GLOBALS['DB']->lastInsertId();
+                $this->setId($result_id);
+                } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
-
         }
 
         static function getAll()
@@ -69,13 +69,14 @@
             } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
-
+            
             $students = array();
             foreach ($returned_students as $student) {
                 $student_name = $student['student_name'];
                 $enrollment_date = $student['enrollment_date'];
+                $course_id = $student['course_id'];
                 $id = $student['id'];
-                $new_student = new Student($name, $enrollment_date, $id);
+                $new_student = new Student($student_name, $enrollment_date, $course_id, $id);
                 array_push($students, $new_student);
             }
             return $students;

@@ -57,7 +57,11 @@
 
         static function getAll()
         {
-            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+            try {
+                $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
             $courses = array();
             foreach ($returned_courses as $course) {
                 $course_name = $course['course_name'];
