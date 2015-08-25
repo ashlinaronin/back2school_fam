@@ -61,7 +61,8 @@
 
         function updateName($new_name)
         {
-
+            $GLOBALS['DB']->exec("UPDATE students SET student_name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setStudentName($new_name);
         }
 
         function delete()
