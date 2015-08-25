@@ -5,7 +5,7 @@
     * @backupStaticAttributes disabled
     */
     require_once "src/Course.php";
-    require_once "src/Student.php"''
+    require_once "src/Student.php";
 
     $server = 'mysql:host=localhost;dbname=university_registrar_test';
     $username = 'root';
@@ -28,7 +28,7 @@
            $course_number = "HS0001";
            $id = 1;
            $test_Course = new Course($course_name, $course_number, $id);
-           
+
            //Act
            $result = $test_Course->getId();
 

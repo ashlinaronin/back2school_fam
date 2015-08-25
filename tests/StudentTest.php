@@ -42,17 +42,23 @@
 
         }
 
-        // function testSave()
-        // {
-            // $student_name = "Ashlin Aronin";
-            // $course_id = 1;
-            // $test_student = new Student($student_name, $course_id);
-            // $test_student->save();
-            //
-        //     $result = Student::getAll();
-        //
-        //     $this->assertEquals($test_student, $result[0]);
-        // }
+        function testSave()
+        {
+            $course_name = "History 0001";
+            $course_number = "HS0001";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+
+            $student_name = "Ashlin Aronin";
+            $course_id = $test_course->getId();
+            $enrollment_date = null;
+            $test_student = new Student($student_name, $course_id);
+            $test_student->save();
+
+            $result = Student::getAll();
+
+            $this->assertEquals($test_student, $result[0]);
+        }
         //
         // function testGetAll()
         // {
