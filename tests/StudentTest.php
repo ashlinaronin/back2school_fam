@@ -20,61 +20,55 @@
             Course::deleteAll();
         }
 
-        function testGetId()
+        function test_getStudentName()
         {
-            $course_name = "History 0001";
-            $course_number = "HS0001";
-            $id = 1;
-            $test_course = new Course($course_name, $course_number, $id);
-
+            //Arrange
             $student_name = "Ashlin Aronin";
-            $course_id = $test_course->getId();
-            $enrollment_date = null;
-            $test_student = new Student($student_name, $enrollment_date, $course_id);
-            $result = $test_student->getCourseId();
+            $enrollment_date = "2014-08-09";
+            $test_student = new Student($student_name, $enrollment_date);
 
-            $this->assertEquals(true, is_numeric($result));
+            //Act
+            $result = $test_student->getStudentName();
 
-        }
-
-        function testCourseId()
-        {
+            //Assert
+            $this->assertEquals($student_name, $result);
 
         }
 
         function testSave()
         {
-            $course_name = "History 0001";
-            $course_number = "HS0001";
-            $id = 1;
-            $test_course = new Course($course_name, $course_number, $id);
-
+            //Arrange
             $student_name = "Ashlin Aronin";
-            $course_id = $test_course->getId();
-            $enrollment_date = null;
-            $test_student = new Student($student_name, $course_id);
+            $enrollment_date = "2014-08-09";
+            $test_student = new Student($student_name, $enrollment_date);
+
+            //Act
             $test_student->save();
 
+            //Assert
             $result = Student::getAll();
-
             $this->assertEquals($test_student, $result[0]);
         }
-        //
-        // function testGetAll()
-        // {
-        //     $student_name = "Ashlin Aronin";
-        //     $course_id = 1;
-        //     $test_student = new Student($student_name, $course_id);
-        //     $test_student->save();
-        //
-        //     $student_name2 = "John Nonlastname";
-        //     $test_student2 = new Student($student_name, $course_id);
-        //     $test_student2->save();
-        //
-        //     $result = Student::getAll();
-        //
-        //     $this->assertEquals([$test_student, $test_student2], $result);
-        // }
+
+        function testGetAll()
+        {
+            //Arrange
+            $student_name = "Ashlin Aronin";
+            $enrollment_date = "2015-08-24";
+            $test_student = new Student($student_name, $enrollment_date);
+            $test_student->save();
+
+            $student_name2 = "John Nolastname";
+            $enrollment_date2 = "2015-07-20";
+            $test_student2 = new Student($student_name, $enrollment_date);
+            $test_student2->save();
+
+            //Act
+            $result = Student::getAll();
+
+            //Assert
+            $this->assertEquals([$test_student, $test_student2], $result);
+        }
     }
 
 

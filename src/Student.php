@@ -4,14 +4,12 @@
 
         private $student_name;
         private $enrollment_date;
-        private $course_id;
         private $id;
 
-        function __construct($student_name, $enrollment_date = null, $course_id, $id = null)
+        function __construct($student_name, $enrollment_date, $id = null)
         {
             $this->student_name = $student_name;
             $this->enrollment_date = $enrollment_date;
-            $this->course_id = $course_id;
             $this->id = $id;
         }
 
@@ -28,21 +26,6 @@
         function getEnrollmentDate()
         {
             return $this->enrollment_date;
-        }
-
-        function setEnrollmentDate($new_enrollment_date)
-        {
-            $this->enrollment_date = $new_enrollment_date;
-        }
-
-        function getCourseId()
-        {
-            return $this->course_id;
-        }
-
-        function setId($new_id)
-        {
-            $this->id = $new_id;
         }
 
         function getId()
@@ -69,7 +52,7 @@
             } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
-            
+
             $students = array();
             foreach ($returned_students as $student) {
                 $student_name = $student['student_name'];
