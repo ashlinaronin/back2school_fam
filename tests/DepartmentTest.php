@@ -27,6 +27,110 @@
             $name = "Biology";
             $address = "346 Stupid Avenue";
             $test_department = new Department($name, $address);
+
+            //Act
+            $result = $test_department->getName();
+
+            //Assert
+            $this->assertEquals($name, $result);
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Biology";
+            $address = "346 Stupid Avenue";
+            $test_department = new Department($name, $address);
+            $test_department->save();
+
+            //Act
+            $test_department->save();
+
+            //Assert
+            $result = Department::getAll();
+            $this->assertEquals($test_department, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Biology";
+            $address = "346 Stupid Avenue";
+            $test_department = new Department($name, $address);
+            $test_department->save();
+
+            $name2 = "Chemiology";
+            $address2 = "55 Bo Ct";
+            $test_department2 = new Department($name2, $address2);
+            $test_department2->save();
+
+            //Act
+            $result = Department::getAll();
+
+            //Assert
+            $this->assertEquals([$test_department, $test_department2], $result);
+        }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Biology";
+            $address = "346 Stupid Avenue";
+            $test_department = new Department($name, $address);
+            $test_department->save();
+
+            $name2 = "Chemiology";
+            $address2 = "55 Bo Ct";
+            $test_department2 = new Department($name2, $address2);
+            $test_department2->save();
+
+            //Act
+            $result = Department::find($test_department2->getId());
+
+            //Assert
+            $this->assertEquals($test_department2, $result);
+        }
+
+        function test_updateName()
+        {
+            //Arrange
+            $name = "Biology";
+            $address = "346 Stupid Avenue";
+            $test_department = new Department($name, $address);
+            $test_department->save();
+
+            $name2 = "Chemiology";
+            $address2 = "55 Bo Ct";
+            $test_department2 = new Department($name2, $address2);
+            $test_department2->save();
+
+            //Act
+            $new_name = "Cancer Studies aka Oncology";
+            $test_department->updateName($new_name);
+
+            //Assert
+            $this->assertEquals($new_name, $result[0]->getName());
+        }
+
+        function test_delete()
+        {
+            //Arrange
+            $name = "Biology";
+            $address = "346 Stupid Avenue";
+            $test_department = new Department($name, $address);
+            $test_department->save();
+
+            $name2 = "Chemiology";
+            $address2 = "55 Bo Ct";
+            $test_department2 = new Department($name2, $address2);
+            $test_department2->save();
+
+            //Act
+            $test_department->delete();
+
+            //Assert
+            $result = Department::getAll();
+            $this->assertEquals([$test_student2], $result);
         }
 
 

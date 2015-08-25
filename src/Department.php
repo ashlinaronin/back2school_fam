@@ -16,27 +16,27 @@
         //getters and setters
         function getName()
         {
-
+            return $this->name;
         }
 
         function setName($new_name)
         {
-
+            $this->name = $new_name;
         }
 
         function getAddress()
         {
-
+            return $this->address;
         }
 
         function setAddress($new_address)
         {
-
+            $this->address = $new_address;
         }
 
         function getId()
         {
-
+            return $this->id;
         }
 
 
@@ -66,7 +66,7 @@
 
         function getCourses()
         {
-            
+
         }
 
         static function getAll()
